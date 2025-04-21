@@ -1,0 +1,38 @@
+import {NavLink} from 'react-router-dom';
+import styles from './RHeader.module.scss';
+import {RButton} from '@shared/ui';
+import {useDispatch} from 'react-redux';
+import {openCreateModal} from '@entities/Modal/model/modalSlice';
+import {NAVIGATION_ITEMS} from '@shared/constants';
+import logo from "@/../logo.jpg"
+
+
+export const RHeader: React.FC = () => {
+    const dispatch = useDispatch();
+
+    return (
+        <header className={styles['r-header']}>
+            <div className={styles['r-header__inner']}>
+                <nav className={styles['r-header__nav']}>
+                    <img src={logo}/>
+                    {NAVIGATION_ITEMS.map((item) => (
+                        <NavLink
+                            to={item.path}
+                            key={item.path}
+                            className={({isActive}) =>
+                                [styles['r-header__nav-item'], isActive ? styles['r-header__nav-item--active'] : ''].join(' ')
+                            }
+                        >
+                            {item.label}
+                        </NavLink>
+                    ))}
+                </nav>
+                <div className={styles['r-header__actions']}>
+                    <RButton onClick={() => dispatch(openCreateModal())}>
+                        Создать задачу
+                    </RButton>
+                </div>
+            </div>
+        </header>
+    );
+};

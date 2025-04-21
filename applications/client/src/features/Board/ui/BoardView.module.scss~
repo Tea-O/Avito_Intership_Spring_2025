@@ -1,0 +1,41 @@
+.board-page__columns {
+  display: flex;
+  flex: 1;
+  gap: 16px;
+}
+
+.board-column {
+  width: 100%;
+  position: relative;
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  overflow: hidden;
+
+  &__view {
+    max-height: 80vh;
+  }
+}
+
+.board-column__header {
+  padding: 12px;
+  background-color: #f1f3f5;
+  border-bottom: 1px solid #dee2e6;
+  font-weight: bold;
+}
+
+.board-column__scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.board-column__footer {
+  padding: 8px;
+  border-top: 1px solid #dee2e6;
+  background-color: #f1f3f5;
+  text-align: center;
+}

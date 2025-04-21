@@ -1,0 +1,42 @@
+export type Priority = 'Low' | 'Medium' | 'High' | string;
+
+export type Status = 'Backlog' | 'InProgress' | 'Done' | string;
+
+export interface Assignee {
+  id: number;
+  fullName: string;
+  email: string;
+  avatarUrl: string;
+}
+
+export interface Tasks {
+  id: number;
+  title: string;
+  description: string;
+  priority: Priority;
+  status: Status;
+  assigneeId: number;
+  assignee: Assignee;
+  boardId: number;
+  boardName: string;
+}
+
+export interface CreatTasks {
+    assigneeId: number,
+    boardId: number,
+    description: string,
+    priority: Priority,
+    title: string
+}
+
+export interface UpdateTasks {
+    assigneeId: number,
+    description: string,
+    priority: Priority,
+    status: Status,
+    title: string
+}
+
+export interface TasksData {
+  data: Tasks[];
+}

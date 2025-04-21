@@ -1,0 +1,34 @@
+@use '@app/styles/styles' as ui;
+
+.r-button {
+
+  border: 1px solid ui.$v-color-border;
+    width: fit-content;
+    display: inline-flex;
+    align-items: center;
+    font-family: cursive;
+    padding: 8px 10px;
+    border-radius: 4px;
+    transition: background-color 0.25s ease-in;
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    padding-right: 8px;
+
+    svg {
+      stroke-width: 2px;
+      transform: scale(1.1);
+    }
+
+
+    i {
+      font-weight: 900;
+      transform: scale(1.1);
+    }
+  }
+
+  &:hover {
+    background-color: rgba(0,0,0,0.1);
+  }
+}

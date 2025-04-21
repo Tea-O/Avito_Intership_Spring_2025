@@ -1,0 +1,66 @@
+.r-checkbox {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    margin: 0;
+    padding-left: 24px;
+    min-height: 18px;
+
+    & __input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+
+        &:checked ~ .r-checkbox__checkmark {
+            background-color: #3f51b5;
+            border-color: #3f51b5;
+
+            &::after {
+                display: block;
+            }
+        }
+
+        &:disabled ~ .r-checkbox__checkmark {
+            background-color: #e0e0e0;
+            border-color: #bdbdbd;
+            cursor: not-allowed;
+        }
+
+        &:focus ~ .r-checkbox__checkmark {
+            box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.2);
+        }
+    }
+
+    & __checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 18px;
+        width: 18px;
+        background-color: white;
+        border: 2px solid #757575;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+
+        &::after {
+            content: "";
+            position: absolute;
+            display: none;
+            left: 5px;
+            top: 1px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+    }
+
+    &:hover & __input:not(:disabled) ~ & __checkmark {
+        border-color: #3f51b5;
+    }
+}

@@ -1,0 +1,111 @@
+@use 'sass:map';
+@use 'sass:list';
+
+// Значения точек перехода для разных размеров устройств
+$r-breakpoint-desktop: 'infinity';
+$r-breakpoint-desktop-s: '1440px';
+$r-breakpoint-laptop: '1200px';
+$r-breakpoint-tablet: '768px';
+$r-breakpoint-mobile: '480px';
+
+// Идентификаторы типов устройств
+$r-device-desktop: 'desktop';
+$r-device-desktop-s: 'desktop-s';
+$r-device-laptop: 'laptop';
+$r-device-tablet: 'tablet';
+$r-device-mobile: 'mobile';
+
+// Карта соответствия типов устройств их значениям точек перехода
+$r-devices: (
+  $r-device-desktop: $r-breakpoint-desktop,
+  $r-device-desktop-s: $r-breakpoint-desktop-s,
+  $r-device-laptop: $r-breakpoint-laptop,
+  $r-device-tablet: $r-breakpoint-tablet,
+  $r-device-mobile: $r-breakpoint-mobile,
+);
+
+/// Получает значение точки перехода для указанного типа устройства
+/// @param {string} $device - Идентификатор типа устройства
+/// @return {string} Значение точки перехода для указанного устройства
+@function -r-get-device-width($device) {
+  @return map.get($r-devices, $device);
+}
+
+/// Получает значение точки перехода для типа устройства, который идет после указанного значения
+/// @param {string} $value - Значение точки перехода, для которого нужно найти следующее устройство
+/// @return {string} Значение точки перехода для следующего типа устройства
+@function -r-get-next-device-width($value) {
+  $devices-values: map.values($r-devices);
+  $index: list.index($devices-values, $value);
+  $next-index: $index - 1;
+
+  @if $index != null and $next-index > 0 {
+    @return list.nth($devices-values, $next-index);
+  }
+
+  @return 'infinity';
+}
+
+/// Создает медиа-запрос для указанного типа устройства и всех устройств большего размера (Mobile First)
+/// @param {string} $device - Тип устройства, начиная с которого применяются стили
+/// @example
+///   @include r-media-screen-from($r-device-tablet) {
+///     // Стили для планшетов и устройств большего размера
+///   }
+@mixin r-media-screen-from($device) {
+  $founded-width: -r-get-device-width($device);
+
+  @if $founded-width != null {
+    @if $founded-width == 'infinity' {
+      @media screen {
+        @content;
+      }
+    } @else {
+      @media screen and (min-width: #{$founded-width}) {
+        @content;
+      }
+    }
+  }
+}
+
+/// Создает медиа-запрос только для указанного типа устройства (Mobile First)
+/// @param {string} $device - Целевой тип устройства
+/// @example
+///   @include r-media-screen-only($r-device-tablet) {
+///     // Стили только для планшетов
+///   }
+@mixin r-media-screen-only($device) {
+  $founded-width: -r-get-device-width($device);
+
+  @if $founded-width != null {
+    $next-width: -r-get-next-device-width($founded-width);
+
+    @if $founded-width == 'infinity' {
+      @media screen and (min-width: #{$r-breakpoint-desktop-s}) {
+        @content;
+      }
+    } @else {
+      @media screen and (min-width: #{$founded-width}) and (max-width: #{$next-width - 1}) {
+        @content;
+      }
+    }
+  }
+}
+
+/// Создает медиа-запрос для диапазона между двумя типами устройств (Mobile First)
+/// @param {string} $deviceFrom - Начальный тип устройства
+/// @param {string} $deviceTo - Конечный тип устройства
+/// @example
+///   @include r-media-screen-range($r-device-tablet, $r-device-laptop) {
+///     // Стили для устройств между планшетом и ноутбуком
+///   }
+@mixin r-media-screen-range($deviceFrom, $deviceTo) {
+  $founded-width-from: -r-get-device-width($deviceFrom);
+  $founded-width-to: -r-get-device-width($deviceTo);
+
+  @if $founded-width-from != null and $founded-width-to != null {
+    @media screen and (min-width: #{$founded-width-from}) and (max-width: #{$founded-width-to - 1}) {
+      @content;
+    }
+  }
+}

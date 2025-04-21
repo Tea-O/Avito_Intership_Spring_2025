@@ -1,0 +1,47 @@
+@use '@app/styles/styles' as ui;
+
+.r-header {
+  border-bottom: 1px solid black;
+    padding: 8px 12px;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-family: cursive;
+
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    & > img {
+      width: 35px;
+    }
+
+    &-item {
+      transition: all 0.25s ease-in;
+
+      &--active {
+        color: ui.$v-color-link-active;
+      }
+
+      &:hover {
+        transform: translate(4px, -4px);
+        color: ui.$v-color-link-active;
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+}

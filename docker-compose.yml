@@ -1,0 +1,26 @@
+services:
+  backend:
+    build:
+      context: ./applications/server
+    volumes:
+      - ./applications/server/main.db:/app/main.db
+    container_name: avito-backend
+    ports:
+      - "8081:8082"
+    networks:
+      - avito-network
+
+  frontend:
+    build:
+      context: ./applications/client
+    container_name: avito-client
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    networks:
+      - avito-network
+
+networks:
+  avito-network:
+    driver: bridge

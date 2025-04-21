@@ -1,0 +1,6 @@
+@use '@app/styles/styles' as ui;
+
+.r-input {
+  padding: 8px;
+  border: 1px solid ui.$v-color-border;
+}

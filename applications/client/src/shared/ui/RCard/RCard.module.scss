@@ -1,0 +1,41 @@
+@use '@app/styles/styles' as ui;
+
+.r-card {
+  position: relative;
+  padding: 16px;
+  border: 1px solid ui.$v-color-border;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+
+    .r-card__icon {
+      opacity: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__icon {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    color: ui.$v-color-border;
+    font-size: 24px;
+  }
+}

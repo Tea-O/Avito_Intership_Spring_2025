@@ -1,0 +1,12 @@
+@use '@app/styles/styles' as ui;
+
+.board-view {
+  width: 100%;
+}
+
+.board-view__list {
+  display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 10px;
+        height: fit-content;
+}

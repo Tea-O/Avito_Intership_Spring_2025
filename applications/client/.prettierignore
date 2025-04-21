@@ -1,0 +1,16 @@
+!.*.js
+!.*.yml
+**/CHANGELOG.md
+dist
+package-lock.json
+**/vite.config.ts
+**/node_modules
+**/dist
+**/.husky
+**/dist
+**/public
+**/node_modules
+**/package-lock.json
+**/package.json
+**/pnpm-lock.yaml
+**/pnpm-workspace.yaml

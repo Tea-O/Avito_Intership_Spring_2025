@@ -1,0 +1,137 @@
+.selectContainer {
+  position: relative;
+  width: 100%;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.selectHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 40px;
+
+  &:hover {
+    border-color: #aaa;
+  }
+
+  &.open {
+    border-color: #0066ff;
+    box-shadow: 0 0 0 2px rgba(0, 102, 255, 0.1);
+  }
+}
+
+.selectedValue {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.placeholder {
+  color: #999;
+}
+
+.arrowIcon {
+  transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+
+  .open & {
+    transform: rotate(180deg);
+  }
+}
+
+.optionsList {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 4px;
+  max-height: 240px;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  animation: fadeIn 0.2s ease-out;
+
+  /* Стилизация скроллбара */
+  scrollbar-width: thin;
+  scrollbar-color: #c1c1c1 #f1f1f1;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #c1c1c1;
+    border-radius: 3px;
+
+    &:hover {
+      background-color: #a8a8a8;
+    }
+  }
+}
+
+.optionItem {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  gap: 8px;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+
+  &.selected {
+    background-color: #e6f2ff;
+    color: #0066ff;
+  }
+}
+
+.optionIcon {
+  display: flex;
+  align-items: center;
+}
+
+.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.error {
+  .selectHeader {
+    border-color: #ff3333;
+  }
+}
+
+.errorMessage {
+  color: #ff3333;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
