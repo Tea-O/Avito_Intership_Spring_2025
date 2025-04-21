@@ -14,7 +14,7 @@ export const BoardsPage: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchBoards());
-  }, [dispatch]);
+  }, []);
 
   return (
       <div className={styles['boards-page__list']}>

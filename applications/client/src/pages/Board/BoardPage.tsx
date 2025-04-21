@@ -136,7 +136,6 @@ export const BoardPage: React.FC = () => {
                             )}
                         </Droppable>
                     ))}
-
                 </div>
             </DragDropContext>
 
